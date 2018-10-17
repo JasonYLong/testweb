@@ -8,7 +8,6 @@
 </head>
 <body>
 	<h3>Maven构建的web项目</h3>
-	<h3>TW HOMEWORK</h3>
 	<c:out value="${msg}"/>
 </body>
 </html>
