@@ -64,7 +64,7 @@ pipeline{
           steps{
               script {
                 try{
-                    sh "curl -s --head  --request GET http://localhost:8888/testweb_svn/|grep 200"
+                    sh "curl -s --head  --request GET http://localhost:8888/testweb_svn/|grep 2000"
                     return true
                 }catch (Exception e){
                     return false
