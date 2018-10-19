@@ -62,7 +62,7 @@ pipeline{
         stage('get web code'){
           agent any
           steps{
-              waitUntil {
+              script {
                 try{
                     sh "curl -s --head  --request GET http://localhost:8888/testweb_svn/|grep 200"
                     return true
