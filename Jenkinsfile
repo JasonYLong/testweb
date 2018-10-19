@@ -62,7 +62,10 @@ pipeline{
         stage('get web code'){
           agent any
           steps{
-            sh 'echo "url_status: " `curl -I -m 10 -o /dev/null -s -w %{http_code} http://localhost:8888/testweb_svn/`'
+            sh """
+            url_status=`curl -I -m 10 -o /dev/null -s -w %{http_code} http://localhost:8888/testweb_svn/`
+            if [[ ${url_status} == 200 ]]; then   echo success;   exit 0; else   echo fail;   exit 1; fi
+            """
           }
         }
         stage('Sanity check staging'){
