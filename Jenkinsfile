@@ -63,12 +63,12 @@ pipeline{
           agent any
           steps{
               waitUntil {
-              try{
-                  sh "curl -s --head  --request GET http://localhost:8888/testweb_svn/|grep 200"
-                  return true
-              }catch (Exception e){
-                  return false
-              } 
+                try{
+                    sh "curl -s --head  --request GET http://localhost:8888/testweb_svn/|grep 200"
+                    return true
+                }catch (Exception e){
+                    return false
+                } 
             //url_status=`curl -I -m 10 -o /dev/null -s -w %{http_code} http://localhost:8888/testweb_svn/`
             //echo ${url_status}
             //if [[ ${url_status} == 200 ]]; then   echo success; else   echo fail;   exit 1; fi
