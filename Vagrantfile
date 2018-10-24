@@ -6,7 +6,6 @@ echo "install dependencies"
 sudo sed -i 's/nameserver 10.0.2.3/nameserver 8.8.8.8/g' /etc/resolv.conf
 sudo yum install -y xz libcgroup
 sudo rpm -Uvh https://yum.dockerproject.org/repo/main/centos/6/Packages/docker-engine-1.7.1-1.el6.x86_64.rpm 
-sudo sed -i 's/other_args=""/other_args="--insecure-registry 192.168.100.100:5000 192.168.100.101:5000"/g' /etc/sysconfig/docker
 sudo service docker start
 sudo wget -O /etc/yum.repos.d/jenkins.repo http://jenkins-ci.org/redhat/jenkins.repo
 sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
