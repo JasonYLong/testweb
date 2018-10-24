@@ -49,20 +49,9 @@ pipeline{
           agent any
           steps{
             //sh "docker save --output tw_v1.tar tomcat:${version}"
-             // docker push 192.168.100.100:5000/tomcat:${version}
+              docker tag tomcat:tw1 development:443/tomcat:${version}
+              docker push development:443/tomcat:${version}
           }
-        }
-        stage('Deploy to staging'){
-           agent any
-           steps{
-             echo 'Deploy to staging'
-             //echo "docker load --input tw_v1.tar"
-             //echo "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
-             //  sh """
-             //    docker rm tomcat -f || true
-             //    docker run -d -p 8888:8080 --name tomcat 192.168.100.100:5000/tomcat:${version}
-             //  """
-           }
         }
         stage('check website status'){
           agent any
@@ -77,19 +66,20 @@ pipeline{
             }
           }
         }
-        stage('Sanity check staging'){
+        stage('Sanity check test'){
             agent any
             steps{
                 echo 'Sanity check'
-                input "Does the staging environment look ok?"
+                input "Does the test environment look ok?"
             }
         }
         stage('Deploy to production'){
             agent any
             steps{
                 echo 'Deploy to production'
-                echo "docker load --input tw_v1.tar"
-                echo "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
+                //echo "docker load --input tw_v1.tar"
+                //echo "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
+                ssh root@production "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
                 
             }
         }
