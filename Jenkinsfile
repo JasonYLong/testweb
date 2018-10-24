@@ -40,7 +40,7 @@ pipeline{
             steps{
                 echo 'Deploy to test'
                 sh """
-                  docker rm tomcat -f || true
+                  docker rm -f tomcat || true
                   docker run -d -p 8888:8080 --name tomcat tomcat:${version}
                 """
             }
@@ -82,7 +82,7 @@ pipeline{
                 //echo "docker load --input tw_v1.tar"
                 //echo "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
                 sh """
-                  sudo ssh root@production 'docker run -d -p 8888:8080 --name tomcat tomcat:${version}'
+                  sudo ssh root@production 'docker run -d -p 8888:8080 --name tomcat development:443/tomcat:${version}'
                 """
             }
         }
