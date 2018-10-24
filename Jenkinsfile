@@ -45,18 +45,23 @@ pipeline{
                 """
             }
         }
-        stage('save tomcat image'){
+        stage('save tomcat local registry'){
           agent any
           steps{
-            sh "docker save --output tw_v1.tar tomcat:${version}"
+            //sh "docker save --output tw_v1.tar tomcat:${version}"
+             // docker push 192.168.100.100:5000/tomcat:${version}
           }
         }
         stage('Deploy to staging'){
            agent any
            steps{
              echo 'Deploy to staging'
-             echo "docker load --input tw_v1.tar"
-             echo "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
+             //echo "docker load --input tw_v1.tar"
+             //echo "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
+             //  sh """
+             //    docker rm tomcat -f || true
+             //    docker run -d -p 8888:8080 --name tomcat 192.168.100.100:5000/tomcat:${version}
+             //  """
            }
         }
         stage('check website status'){
