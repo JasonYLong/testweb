@@ -49,7 +49,7 @@ pipeline{
           agent any
           steps{
             //sh "docker save --output tw_v1.tar tomcat:${version}"
-              docker tag tomcat:tw1 development:443/tomcat:${version}
+              docker tag tomcat:${version} development:443/tomcat:${version}
               docker push development:443/tomcat:${version}
           }
         }
