@@ -79,7 +79,7 @@ pipeline{
                 echo 'Deploy to production'
                 //echo "docker load --input tw_v1.tar"
                 //echo "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
-                ssh root@production "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
+                sudo ssh root@production "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
                 
             }
         }
