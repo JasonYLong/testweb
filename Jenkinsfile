@@ -49,8 +49,10 @@ pipeline{
           agent any
           steps{
             //sh "docker save --output tw_v1.tar tomcat:${version}"
-              docker tag tomcat:${version} development:443/tomcat:${version}
-              docker push development:443/tomcat:${version}
+              sh """
+                docker tag tomcat:${version} development:443/tomcat:${version}
+                docker push development:443/tomcat:${version}
+              """
           }
         }
         stage('check website status'){
@@ -79,8 +81,9 @@ pipeline{
                 echo 'Deploy to production'
                 //echo "docker load --input tw_v1.tar"
                 //echo "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
-                sudo ssh root@production "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
-                
+                sh """
+                  sudo ssh root@production 'docker run -d -p 8888:8080 --name tomcat tomcat:${version}'
+                """
             }
         }
     }
