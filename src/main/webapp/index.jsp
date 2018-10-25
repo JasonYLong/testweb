@@ -9,7 +9,7 @@
 <body>
 	<h3>Maven构建的web项目</h3>
 	<h3>This is a maven project.</h3>
-        <h3>This is for change V1.3</h3>
+        <h3>This is for change V1.1</h3>
 	<a href="hello.do">访问服务器</a>
 </body>
 </html>
