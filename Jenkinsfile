@@ -1,5 +1,6 @@
 pipeline{
     agent none
+    triggers { pollSCM('H/15 * * * *') }
     environment{
         version = "tw1"
     }
@@ -50,6 +51,7 @@ pipeline{
           steps{
             //sh "docker save --output tw_v1.tar tomcat:${version}"
               sh """
+                docker rmi development:443/tomcat:${version}
                 docker tag -f tomcat:${version} development:443/tomcat:${version}
                 docker push development:443/tomcat:${version}
               """
