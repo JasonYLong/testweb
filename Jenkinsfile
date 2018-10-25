@@ -1,6 +1,6 @@
 pipeline{
     agent none
-    triggers { pollSCM('H/15 * * * *') }
+    triggers { pollSCM('H 4/* 0 0 1-5') }
     environment{
         version = "tw1"
     }
@@ -85,6 +85,7 @@ pipeline{
                 //echo "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
                 sh """
                   sudo ssh root@production 'docker rm -f tomcat || true'
+                  sudo ssh root@production 'docker rmi -f development:443/tomcat:${version} || true'
                   sudo ssh root@production 'docker run -d -p 8888:8080 --name tomcat development:443/tomcat:${version}'
                 """
             }
