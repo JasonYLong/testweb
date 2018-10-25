@@ -1,6 +1,6 @@
 pipeline{
     agent none
-    triggers { pollSCM('H/15 * * * *') }
+    triggers { pollSCM('H/5 * * * *') }
     environment{
         version = "tw1"
     }
