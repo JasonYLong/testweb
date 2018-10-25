@@ -82,6 +82,7 @@ pipeline{
                 //echo "docker load --input tw_v1.tar"
                 //echo "docker run -d -p 8888:8080 --name tomcat tomcat:${version}"
                 sh """
+                  sudo docker rm -f tomcat || true
                   sudo ssh root@production 'docker run -d -p 8888:8080 --name tomcat development:443/tomcat:${version}'
                 """
             }
