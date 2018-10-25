@@ -18,6 +18,8 @@ sudo mkdir -p /etc/docker/certs.d/development:443
 sudo wget -O /myregistry/registry/certs/registry.crt https://raw.githubusercontent.com/JasonYLong/testweb/master/certs/registry.crt 
 sudo wget -O /myregistry/registry/certs/registry.key https://raw.githubusercontent.com/JasonYLong/testweb/master/certs/registry.key
 sudo cp /myregistry/registry/certs/registry.crt /etc/docker/certs.d/development:443/ca.crt
+echo "generate public key"
+sudo ssh-keygen -t rsa -b 4096 -P '' -f /root/.ssh/id_rsa
 SCRIPT
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
